@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends apt-utils
 # ERLANG
 #
 
-ENV ERLANG_VERSION="1:23.0.2-2"
+ENV ERLANG_VERSION="1:23.0.3"
 
 RUN wget https://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb && dpkg -i erlang-solutions_1.0_all.deb
 
