@@ -22,7 +22,7 @@ RUN apt-get update && \
 # ELIXIR
 #
 
-ENV ELIXIR_VERSION="v1.10.3"
+ENV ELIXIR_VERSION="v1.10.4"
 
 RUN set -xe \
   && ELIXIR_DOWNLOAD_URL="https://github.com/elixir-lang/elixir/releases/download/${ELIXIR_VERSION}/Precompiled.zip" \
