@@ -11,12 +11,35 @@ RUN apt-get update && apt-get install -y --no-install-recommends apt-utils
 # ERLANG
 #
 
-ENV ERLANG_VERSION="1:23.0.3-1"
+ENV ERLANG_VERSION="23.0.3"
 
-RUN wget https://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb && dpkg -i erlang-solutions_1.0_all.deb
+RUN apt-get update &&\
+    apt-get install -y -q build-essential make &&\
+    apt-get install -y -q openssl libssl-dev libncurses5-dev &&\
+    apt-get autoremove -y --purge &&\
+    apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN apt-get update && \
-  apt-get install -yy --no-install-recommends esl-erlang=${ERLANG_VERSION}
+ENV KERL_URL "https://raw.githubusercontent.com/kerl/kerl/master/kerl"
+
+RUN curl -O -s ${KERL_URL} &&\
+    chmod a+x kerl &&\
+    mv kerl /usr/bin
+
+ENV KERL_CONFIGURE_OPTIONS "--with-microstate-accounting=extra \
+  --without-edoc \
+  --without-erl_docgen \
+  --without-ftp \
+  --without-odbc \
+  --without-ssh \
+  --without-ftp \
+  --without-tftp"
+
+RUN kerl update releases &&\
+    MAKEFLAGS="-j8" kerl build ${ERLANG_VERSION} ${ERLANG_VERSION} &&\
+    kerl install ${ERLANG_VERSION} /opt/erlang/${ERLANG_VERSION} &&\
+    echo ". /opt/erlang/${ERLANG_VERSION}/activate" >> /etc/bash.bashrc &&\
+    ln -s /opt/erlang/${ERLANG_VERSION}/bin/erl /usr/local/bin/erl &&\
+    erl -version
 
 #
 # ELIXIR
