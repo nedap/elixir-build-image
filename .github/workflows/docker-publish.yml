@@ -6,9 +6,9 @@ on:
     branches:
       - master
 
-    # Publish `v1.2.3` tags as releases.
+    # Publish tags as releases.
     tags:
-      - v*
+      - '*'
 
 env:
   IMAGE_NAME: nd-elixir-build-image
