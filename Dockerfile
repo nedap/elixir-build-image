@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends apt-utils
 # ERLANG
 #
 
-ENV ERLANG_VERSION="23.0.3"
+ENV ERLANG_VERSION="23.0.4"
 
 RUN apt-get update &&\
     apt-get install -y -q build-essential make &&\
