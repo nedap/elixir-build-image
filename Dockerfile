@@ -45,7 +45,7 @@ RUN kerl update releases &&\
 # ELIXIR
 #
 
-ENV ELIXIR_VERSION="v1.12.0"
+ENV ELIXIR_VERSION="v1.12.1"
 
 RUN set -xe \
   && ELIXIR_DOWNLOAD_URL="https://github.com/elixir-lang/elixir/releases/download/${ELIXIR_VERSION}/Precompiled.zip" \
