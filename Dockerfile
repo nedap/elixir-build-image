@@ -1,4 +1,5 @@
-FROM buildpack-deps:stretch
+ARG buildpack_tag=stretch
+FROM buildpack-deps:${buildpack_tag}
 
 USER root
 

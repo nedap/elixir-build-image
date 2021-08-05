@@ -8,6 +8,11 @@ on:
 
 jobs:
   push:
+    strategy:
+      matrix:
+        buildpack_tag:
+          - "stretch"
+          - "buster"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -23,8 +28,10 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
+          build-args: |
+            buildpack_tag:${{ matrix.buildpack_tag }}
           tags: |
-            docker.pkg.github.com/${{ github.repository }}/nd-elixir-build-image:${{ env.RELEASE_VERSION }}
+            docker.pkg.github.com/${{ github.repository }}/nd-elixir-build-image:${{ matrix.buildpack_tag }}-${{ env.RELEASE_VERSION }}
 
       -
         name: Image digest
