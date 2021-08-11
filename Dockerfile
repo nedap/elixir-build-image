@@ -12,19 +12,19 @@ RUN apt-get update && apt-get install -y --no-install-recommends apt-utils
 # ERLANG
 #
 
-ENV ERLANG_VERSION="24.0.5"
+ENV ERLANG_VERSION="23.1"
 
 RUN apt-get update &&\
-    apt-get install -y -q build-essential make &&\
-    apt-get install -y -q openssl libssl-dev libncurses5-dev &&\
-    apt-get autoremove -y --purge &&\
-    apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+  apt-get install -y -q build-essential make &&\
+  apt-get install -y -q openssl libssl-dev libncurses5-dev &&\
+  apt-get autoremove -y --purge &&\
+  apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ENV KERL_URL "https://raw.githubusercontent.com/kerl/kerl/master/kerl"
 
 RUN curl -O -s ${KERL_URL} &&\
-    chmod a+x kerl &&\
-    mv kerl /usr/bin
+  chmod a+x kerl &&\
+  mv kerl /usr/bin
 
 ENV KERL_CONFIGURE_OPTIONS "--with-microstate-accounting=extra \
   --without-edoc \
@@ -36,17 +36,17 @@ ENV KERL_CONFIGURE_OPTIONS "--with-microstate-accounting=extra \
   --without-tftp"
 
 RUN kerl update releases &&\
-    MAKEFLAGS="-j8" kerl build ${ERLANG_VERSION} ${ERLANG_VERSION} &&\
-    kerl install ${ERLANG_VERSION} /opt/erlang/${ERLANG_VERSION} &&\
-    echo ". /opt/erlang/${ERLANG_VERSION}/activate" >> /etc/bash.bashrc &&\
-    ln -s /opt/erlang/${ERLANG_VERSION}/bin/erl /usr/local/bin/erl &&\
-    erl -version
+  MAKEFLAGS="-j8" kerl build ${ERLANG_VERSION} ${ERLANG_VERSION} &&\
+  kerl install ${ERLANG_VERSION} /opt/erlang/${ERLANG_VERSION} &&\
+  echo ". /opt/erlang/${ERLANG_VERSION}/activate" >> /etc/bash.bashrc &&\
+  ln -s /opt/erlang/${ERLANG_VERSION}/bin/erl /usr/local/bin/erl &&\
+  erl -version
 
 #
 # ELIXIR
 #
 
-ENV ELIXIR_VERSION="v1.12.2"
+ENV ELIXIR_VERSION="v1.11.0"
 
 RUN set -xe \
   && ELIXIR_DOWNLOAD_URL="https://github.com/elixir-lang/elixir/releases/download/${ELIXIR_VERSION}/Precompiled.zip" \
