@@ -19,7 +19,7 @@ RUN if [ ! $(lsb_release -cs) = "stretch" ]; then bash -c "$(wget -O - https://a
 # ERLANG
 #
 
-ENV ERLANG_VERSION="24.0.5"
+ENV ERLANG_VERSION="24.1.2"
 
 RUN apt-get update &&\
     apt-get install -y -q build-essential make &&\
