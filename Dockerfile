@@ -6,7 +6,14 @@ USER root
 ENV LANG=C.UTF-8
 ENV HOME=/root
 
-RUN apt-get update && apt-get install -y --no-install-recommends apt-utils
+RUN apt-get update && apt-get install -y --no-install-recommends apt-utils \
+    lsb-release software-properties-common
+
+#
+# Clang for JIT.
+# C++17 support is needed, and LLVM does not provide a package for it.
+#
+RUN if [ ! $(lsb_release -cs) = "stretch" ]; then bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"; fi;
 
 #
 # ERLANG
