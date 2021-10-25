@@ -29,7 +29,7 @@ jobs:
         with:
           push: true
           build-args: |
-            buildpack_tag:${{ matrix.buildpack_tag }}
+            buildpack_tag=${{ matrix.buildpack_tag }}
           tags: |
             docker.pkg.github.com/${{ github.repository }}/nd-elixir-build-image:${{ matrix.buildpack_tag }}-${{ env.RELEASE_VERSION }}
 
