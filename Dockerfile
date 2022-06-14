@@ -7,7 +7,7 @@ ENV LANG=C.UTF-8
 ENV HOME=/root
 
 RUN apt-get update && apt-get install -y --no-install-recommends apt-utils \
-    lsb-release software-properties-common
+  lsb-release software-properties-common
 
 #
 # Clang for JIT.
@@ -19,19 +19,19 @@ RUN if [ ! $(lsb_release -cs) = "stretch" ]; then bash -c "$(wget -O - https://a
 # ERLANG
 #
 
-ENV ERLANG_VERSION="24.2.1"
+ENV ERLANG_VERSION="25.0.1"
 
 RUN apt-get update &&\
-    apt-get install -y -q build-essential make &&\
-    apt-get install -y -q openssl libssl-dev libncurses5-dev &&\
-    apt-get autoremove -y --purge &&\
-    apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+  apt-get install -y -q build-essential make &&\
+  apt-get install -y -q openssl libssl-dev libncurses5-dev &&\
+  apt-get autoremove -y --purge &&\
+  apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ENV KERL_URL "https://raw.githubusercontent.com/kerl/kerl/master/kerl"
 
 RUN curl -O -s ${KERL_URL} &&\
-    chmod a+x kerl &&\
-    mv kerl /usr/bin
+  chmod a+x kerl &&\
+  mv kerl /usr/bin
 
 ENV KERL_CONFIGURE_OPTIONS "--with-microstate-accounting=extra \
   --without-edoc \
@@ -43,11 +43,11 @@ ENV KERL_CONFIGURE_OPTIONS "--with-microstate-accounting=extra \
   --without-tftp"
 
 RUN kerl update releases &&\
-    MAKEFLAGS="-j8" kerl build ${ERLANG_VERSION} ${ERLANG_VERSION} &&\
-    kerl install ${ERLANG_VERSION} /opt/erlang/${ERLANG_VERSION} &&\
-    echo ". /opt/erlang/${ERLANG_VERSION}/activate" >> /etc/bash.bashrc &&\
-    ln -s /opt/erlang/${ERLANG_VERSION}/bin/erl /usr/local/bin/erl &&\
-    erl -version
+  MAKEFLAGS="-j8" kerl build ${ERLANG_VERSION} ${ERLANG_VERSION} &&\
+  kerl install ${ERLANG_VERSION} /opt/erlang/${ERLANG_VERSION} &&\
+  echo ". /opt/erlang/${ERLANG_VERSION}/activate" >> /etc/bash.bashrc &&\
+  ln -s /opt/erlang/${ERLANG_VERSION}/bin/erl /usr/local/bin/erl &&\
+  erl -version
 
 #
 # ELIXIR
