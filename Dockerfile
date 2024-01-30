@@ -1,4 +1,4 @@
-ARG buildpack_tag=stretch
+ARG buildpack_tag=buster
 FROM buildpack-deps:${buildpack_tag}
 
 USER root
