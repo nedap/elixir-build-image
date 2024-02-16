@@ -1,5 +1,6 @@
 ARG buildpack_tag
 FROM buildpack-deps:${buildpack_tag}
+ARG buildpack_tag
 
 USER root
 
