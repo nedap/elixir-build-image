@@ -9,7 +9,7 @@ ENV HOME=/root
 
 RUN if [ "$buildpack_tag" = "stretch" ]; then bash -c "echo 'deb http://archive.debian.org/debian stretch main' > /etc/apt/sources.list"; fi;
 
-RUN apt-get update && apt-get install -y --no-install-recommends apt-utils \
+RUN apt-get update && apt-get install -y --no-install-recommends \
   lsb-release software-properties-common
 
 #
