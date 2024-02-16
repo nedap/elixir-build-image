@@ -1,12 +1,15 @@
-ARG buildpack_tag=buster
+ARG buildpack_tag
 FROM buildpack-deps:${buildpack_tag}
+ARG buildpack_tag
 
 USER root
 
 ENV LANG=C.UTF-8
 ENV HOME=/root
 
-RUN apt-get update && apt-get install -y --no-install-recommends apt-utils \
+RUN if [ "$buildpack_tag" = "stretch" ]; then bash -c "echo 'deb http://archive.debian.org/debian stretch main' > /etc/apt/sources.list"; fi;
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
   lsb-release software-properties-common
 
 #
