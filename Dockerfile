@@ -7,7 +7,7 @@ ENV LANG=C.UTF-8
 ENV HOME=/root
 
 ENV DEBIAN_VERSION=${buildpack_tag}
-RUN if [ $DEBIAN_VERSION = "stretch" ]; then bash -c "sed -i -e 's/http:/https:/g' -e 's/deb.debian.org/archive.debian.org/g' -e 's/security.debian.org/archive.debian.org/g' /etc/apt/sources.list"; fi;
+RUN if [ ${DEBIAN_VERSION} = "stretch" ]; then bash -c "sed -i -e 's/http:/https:/g' -e 's/deb.debian.org/archive.debian.org/g' -e 's/security.debian.org/archive.debian.org/g' /etc/apt/sources.list"; fi;
 
 RUN apt-get update && apt-get install -y --no-install-recommends apt-utils \
   lsb-release software-properties-common
