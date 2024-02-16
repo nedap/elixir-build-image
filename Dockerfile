@@ -6,7 +6,7 @@ USER root
 ENV LANG=C.UTF-8
 ENV HOME=/root
 
-RUN if [ ! $(lsb_release -cs) = "stretch" ]; then bash -c "sed -i 's/http:/https:/g' /etc/apt/sources.list"; fi;
+RUN if [ ! "${buildpack_tag}" = "stretch" ]; then bash -c "sed -i 's/http:/https:/g' /etc/apt/sources.list"; fi;
 
 RUN apt-get update && apt-get install -y --no-install-recommends apt-utils \
   lsb-release software-properties-common
