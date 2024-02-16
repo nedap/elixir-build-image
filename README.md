@@ -8,4 +8,4 @@ To create a new release:
   * commit your code to master
   * create a GH release
     * go to [releases](https://github.com/nedap/elixir-build-image/releases) -> "Draft a new release"
-    * select tag: <your tag here>, target: master, Release title: <your tag here>, check "Set as the latest release" and publish
+    * select tag: [your tag here], target: master, Release title: [your tag here], check "Set as the latest release" and publish
