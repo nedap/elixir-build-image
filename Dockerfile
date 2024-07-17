@@ -22,7 +22,7 @@ RUN if [ ! $(lsb_release -cs) = "stretch" ]; then bash -c "$(wget -O - https://a
 # ERLANG
 #
 
-ENV ERLANG_VERSION="25.3.2.8"
+ENV ERLANG_VERSION="26.2.5.2"
 
 RUN apt-get update &&\
   apt-get install -y -q build-essential make &&\
@@ -56,7 +56,7 @@ RUN kerl update releases &&\
 # ELIXIR
 #
 
-ENV ELIXIR_DOWNLOAD_URL="https://github.com/elixir-lang/elixir/releases/download/v1.14.5/elixir-otp-25.zip"
+ENV ELIXIR_DOWNLOAD_URL="https://github.com/elixir-lang/elixir/releases/download/v1.16.3/elixir-otp-26.zip"
 
 RUN set -xe \
   && buildDeps=' \
